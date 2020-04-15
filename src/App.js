@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import UserList from './Components/UserList';
 import Gallery from './Components/Gallery';
-import Handler from './Components/Handler';
 
 
 class App extends Component {
-  state = { loading: false };
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       id:''
+    }
+    this.EventHandler=this.EventHandler.bind(this)
+  }
+  
+  EventHandler(id){
+    this.setState({
+      id: id
+    })
+    //alert('success')
+    //console.log('event'+this.state.id)
+
+  }
 
   // const clickHandler = (id,name)=>{
   //   console.log(id,name)
@@ -16,11 +31,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-UserList">
-          <UserList clickHandler={Handler.eventHandler}/>
+          <UserList clickHandler={this.EventHandler}/>
         </div>
-        {/* <div className="App-Gallery">
-          <Gallery/>
-        </div> */}
+        <div className="App-Gallery">
+          <Gallery id={this.state.id}/>
+        </div>
       </div>
     );
   }

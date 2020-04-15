@@ -7,52 +7,52 @@ class UserList extends Component {
         this.state = {
              data:[]
         }
-        this.Display=this.Display.bind(this)
+        //this.Display=this.Display.bind(this)
     }
 
-    Display(props){
-        //console.log('display')
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(json =>{       
-        this.setState({
-            data:json
-        })
-        }
-        )
+    // Display(props){
+    //     //console.log('display')
+    //     fetch('https://jsonplaceholder.typicode.com/users')
+    //     .then(response => response.json())
+    //     .then(json =>{       
+    //     this.setState({
+    //         data:json
+    //     })
+    //     }
+    //     )
     
 
-        return(
-            <div className='userDisplay' id='displayId'>
-                {this.state.data.map(index => <h3 className='users' id={index.id} onClick={
-                    () => props.clickHandler(index.id,index.name)
-                    }>
-                      {index.name}
-                      </h3>)}
-            </div>
-        )
+    //     return(
+    //         <div className='userDisplay' id='displayId'>
+    //             {this.state.data.map(index => <h3 className='users' id={index.id} onClick={
+    //                 () => Handler.EventHandler(index.id,index.name)
+    //                 }>
+    //                   {index.name}
+    //                   </h3>)}
+    //         </div>
+    //     )
+    // }
+
+    componentDidMount(){
+        this.renderNames();
     }
 
-    // Display(){
-    //     this.renderNames();
-    // }
-
-    // renderNames = async() => {
-    //     try{
-    //         let response = await fetch('https://jsonplaceholder.typicode.com/users');
-    //         let json = await response.json();
-    //         console.log(json)
-    //         this.setState({
-    //             data:json.map((element,index)=> <li key={element.id}>
-    //                 {element.name}
-    //             </li>)
-    //         })
-    //         console.log(this.state.data)
-    //     }
-    //     catch(err){
-    //         console.log(err)
-    //     }
-    // }
+    renderNames = async() => {
+        try{
+            let response = await fetch('https://reqres.in/api/users');
+            let json = await response.json();
+            //console.log(json)
+            this.setState({
+                data:json.data.map((element)=> <h4 key={element.id} onClick={() => this.props.clickHandler(element.id)}>
+                    {`${element.first_name} ${element.last_name}`}
+                </h4>)
+            })
+            console.log('userstate '+this.state.data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
     
     render() {
         
@@ -67,10 +67,10 @@ class UserList extends Component {
                         )
                     }
                 </ul> */}
-                <this.Display/>
-                {/* <ul>
+                {/* <this.Display/> */}
+                <ul>
                     {this.state.data}
-                </ul> */}
+                </ul>
             </div>
         )
     }
