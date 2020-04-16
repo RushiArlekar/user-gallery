@@ -5,34 +5,13 @@ class UserList extends Component {
         super(props)
     
         this.state = {
-             data:[]
+             data:[{
+                id:'',
+                FirstName:'',
+                LastName:''
+             }]
         }
-        //this.Display=this.Display.bind(this)
     }
-
-    // Display(props){
-    //     //console.log('display')
-    //     fetch('https://jsonplaceholder.typicode.com/users')
-    //     .then(response => response.json())
-    //     .then(json =>{       
-    //     this.setState({
-    //         data:json
-    //     })
-    //     }
-    //     )
-    
-
-    //     return(
-    //         <div className='userDisplay' id='displayId'>
-    //             {this.state.data.map(index => <h3 className='users' id={index.id} onClick={
-    //                 () => Handler.EventHandler(index.id,index.name)
-    //                 }>
-    //                   {index.name}
-    //                   </h3>)}
-    //         </div>
-    //     )
-    // }
-
     componentDidMount(){
         this.renderNames();
     }
@@ -41,36 +20,26 @@ class UserList extends Component {
         try{
             let response = await fetch('https://reqres.in/api/users');
             let json = await response.json();
-            //console.log(json)
+            let listUser = this.state.data.slice()
+            for(let i=0;i < json.data.length;i++){
+                listUser[i] = {id:json.data[i].id, FirstName:json.data[i].first_name, LastName:json.data[i].last_name}
+            }
             this.setState({
-                data:json.data.map((element)=> <h4 key={element.id} onClick={() => this.props.clickHandler(element.id)}>
-                    {`${element.first_name} ${element.last_name}`}
-                </h4>)
+                data:listUser
             })
-            console.log('userstate '+this.state.data)
         }
         catch(err){
             console.log(err)
         }
     }
     
-    render() {
-        
-        //console.log(this.state.data)
+    render() {    
         return (
             <div>
-                {/* <ul>
-                    {
-                        this.state.data.map(index => <h3 className='users' id={index.id} >
-                              {index.name}
-                              </h3>
-                        )
-                    }
-                </ul> */}
-                {/* <this.Display/> */}
-                <ul>
-                    {this.state.data}
-                </ul>
+                {this.state.data.map(element => 
+                    <h4 key={element.id} onClick={() => this.props.clickHandler(element.id)}>
+                    {`${element.FirstName} ${element.LastName}`}
+                </h4>)}
             </div>
         )
     }

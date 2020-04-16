@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import UserList from './Components/UserList';
 import Gallery from './Components/Gallery';
-
 
 class App extends Component {
   constructor(props) {
@@ -19,14 +17,7 @@ class App extends Component {
     this.setState({
       id: id
     })
-    //alert('success')
-    //console.log('event'+this.state.id)
-
   }
-
-  // const clickHandler = (id,name)=>{
-  //   console.log(id,name)
-  // }
   render(){
     return (
       <div className="App">
