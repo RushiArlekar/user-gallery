@@ -11,8 +11,8 @@ class Gallery extends Component {
     }
     
     render(){
-        const[id,data,ad]=[this.props.userDetails.clickedId,this.props.userDetails.data,this.props.userDetails.ad]
-        if(id === ''){
+        console.log(this.props)
+        if(this.props.clickedId === ''){
             return(
                 <div/>
             )
@@ -21,21 +21,21 @@ class Gallery extends Component {
 
             return (
                 <div>
-                    <img src={data.avatar} className='User-Image' alt='profile'/>
+                    <img src={this.props.data.avatar} className='User-Image' alt='profile'/>
                     <div>
-                        {`Name: ${data.first_name} ${data.last_name}`}
+                        {`Name: ${this.props.data.first_name} ${this.props.data.last_name}`}
                     </div>
                     <div>
-                        {`Email: ${data.email}`}
+                        {`Email: ${this.props.data.email}`}
                     </div>
                     <div>
-                        {`Commpany: ${ad.company}`}
+                        {`Commpany: ${this.props.ad.company}`}
                     </div>
                     <div>
-                        {`Company URL: ${ad.url}`}
+                        {`Company URL: ${this.props.ad.url}`}
                     </div>
                     <div>
-                        {`MOre Info: ${ad.text}`}
+                        {`MOre Info: ${this.props.ad.text}`}
                     </div>
                 </div>
             )
