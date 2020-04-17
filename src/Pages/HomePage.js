@@ -24,13 +24,11 @@ class HomePage extends Component {
         try{
             let response = await fetch('https://reqres.in/api/users/'+key);
             let json = await response.json();
-            //console.log(json)
             this.setState({
                 data:json.data,
                 ad:json.ad,
                 clickedId:key
             })
-            //console.log(this.state)
         }
         catch(err){
             console.log(err)
@@ -41,11 +39,9 @@ class HomePage extends Component {
         try{
             let response = await fetch('https://reqres.in/api/users');
             let json = await response.json();
-            //console.log(json)
             this.setState({
                 details:json.data
             })
-            //console.log(this.state)
         }
         catch(err){
             console.log(err)
@@ -53,7 +49,6 @@ class HomePage extends Component {
     }
     
     render() {
-        console.log(this.state.clickedId)
         const{details,data,ad,clickedId}=this.state
         
         return (
